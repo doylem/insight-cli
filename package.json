@@ -5,7 +5,10 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "tsc && node dist/index.js",
-    "test": "jest"
+    "test": "jest",
+    "lint": "npm run eslint && npm run prettier",
+    "eslint": "eslint src/**/*.ts",
+    "prettier": "prettier --check \"src/**/*.ts\""
   },
   "repository": {
     "type": "git",
@@ -19,6 +22,10 @@
   "homepage": "https://github.com/doylem/insight-cli#readme",
   "devDependencies": {
     "@types/node": "^14.14.26",
+    "@typescript-eslint/eslint-plugin": "^4.15.0",
+    "@typescript-eslint/parser": "^4.15.0",
+    "eslint": "^7.19.0",
+    "prettier": "^2.2.1",
     "typescript": "^4.1.5"
   }
 }

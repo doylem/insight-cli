@@ -16,6 +16,8 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
+    <li><a href="#testing">Testing</a></li>
+    <li><a href="#quality">Quality</a></li>
     <li><a href="#assumptions">Assumptions</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
     <li><a href="#troubleshooting">Troubleshooting</a></li>
@@ -92,6 +94,14 @@ To watch files for changes and re-run the tests, execute:
 
 ```sh
 npm run test:watch
+```
+
+## Quality
+
+We rely on eslint and prettier to ensure high code quailty and consistency. To lint this app, execute:
+
+```sh
+npm run lint
 ```
 
 ## Assumptions
