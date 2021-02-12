@@ -70,15 +70,15 @@ Alternateively, you may [install Node and npm globally](#installing-node-and-npm
    npm install
    ```
 
-1. Build the application
-
-   ```sh
-   npm run build
-   ```
-
 ## Usage
 
-TBD
+1. Build and run the application
+
+   ```sh
+   npm start
+   ```
+
+1. Follow the prompts
 
 ## Testing
 

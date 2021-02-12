@@ -2,8 +2,9 @@
   "name": "insight-cli",
   "version": "1.0.0",
   "description": "JSON searching application - Zendesk coding challenge",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
+    "start": "tsc && node dist/index.js",
     "test": "jest"
   },
   "repository": {
@@ -15,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/doylem/insight-cli/issues"
   },
-  "homepage": "https://github.com/doylem/insight-cli#readme"
+  "homepage": "https://github.com/doylem/insight-cli#readme",
+  "devDependencies": {
+    "@types/node": "^14.14.26",
+    "typescript": "^4.1.5"
+  }
 }
