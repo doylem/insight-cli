@@ -1,6 +1,39 @@
 {
   "parser": "@typescript-eslint/parser",
   "extends": ["plugin:@typescript-eslint/recommended"],
-  "parserOptions": { "ecmaVersion": 2018, "sourceType": "module" },
-  "rules": {}
+  "parserOptions": { "ecmaVersion": 2020, "sourceType": "module" },
+  "rules": {
+    // tsc already handles some of these rules for us, so we can disable them
+    // https://github.com/typescript-eslint/typescript-eslint#can-i-use-all-of-the-existing-eslint-plugins-and-rules-without-any-changes
+    "default-case": "off",
+    "no-dupe-class-members": "off",
+    "no-undef": "off",
+
+    // Custom TypeScript specific rules (and turn off ESLint equivalents where necessary)
+    "@typescript-eslint/explicit-function-return-type": 0,
+    "@typescript-eslint/member-delimiter-style": [
+      "error",
+      { "multiline": { "delimiter": "none" } }
+    ],
+    "@typescript-eslint/no-explicit-any": 0,
+    "@typescript-eslint/no-non-null-assertion": 0,
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": [
+      "error",
+      {
+        "functions": false,
+        "classes": false,
+        "variables": false,
+        "typedefs": false
+      }
+    ],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "args": "none",
+        "ignoreRestSiblings": true
+      }
+    ]
+  }
 }
