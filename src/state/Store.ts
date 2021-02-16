@@ -1,16 +1,17 @@
 import { Store as DataStore } from './types'
 import arrayToDict from '../util/arrayToDict'
+import config from '../config/config'
 
 class Store {
   public store: DataStore
 
   constructor() {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const users = require('../../data/users.json')
+    const users = require(config.users)
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const organizations = require('../../data/organizations.json')
+    const organizations = require(config.organizations)
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const tickets = require('../../data/tickets.json')
+    const tickets = require(config.tickets)
 
     this.store = {
       users: arrayToDict(users),
