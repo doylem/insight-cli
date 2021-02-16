@@ -1,1 +1,4 @@
-console.log('Hello typescript world')
+#!/usr/bin/env node
+import { init } from './App'
+
+init()
