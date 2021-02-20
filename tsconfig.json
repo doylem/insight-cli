@@ -6,7 +6,7 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["es2020"],
+    "lib": ["esnext"],
     "module": "commonjs",
     "outDir": "dist",
     "skipLibCheck": true,
