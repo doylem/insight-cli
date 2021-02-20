@@ -18,6 +18,7 @@ export interface User {
   tags: Array<string>
   suspended: boolean
   role: string
+  relationships?: any
 }
 
 export interface Organization {
@@ -30,6 +31,7 @@ export interface Organization {
   details: string
   shared_tickets: boolean
   tags: Array<string>
+  relationships?: any
 }
 
 export interface Ticket {
@@ -48,10 +50,62 @@ export interface Ticket {
   has_incidents: boolean
   due_at: string
   via: string
+  relationships?: any
 }
 
+export type Entities = User | Organization | Ticket
+
+export enum Stores {
+  users = 'users',
+  organizations = 'organizations',
+  tickets = 'tickets',
+}
+
+export type UserRelationships = [
+  {
+    store: 'organizations'
+    key: string
+    name: string
+  },
+]
+export type OrganizationRelationships = []
+export type TicketRelationships = [
+  {
+    store: 'organizations'
+    key: string
+    name: string
+  },
+  {
+    store: 'users'
+    key: string
+    name: string
+  },
+  {
+    store: 'users'
+    key: string
+    name: string
+  },
+]
+
+export interface UserStore {
+  data: { [key: string]: User }
+  relationships: UserRelationships
+  name: 'User'
+}
+export interface OrganizationStore {
+  data: { [key: string]: Organization }
+  relationships: OrganizationRelationships
+  name: 'Organization'
+}
+
+export interface TicketStore {
+  data: { [key: string]: Ticket }
+  relationships: TicketRelationships
+  name: 'Ticket'
+}
+
+export type EntityStores = UserStore | OrganizationStore | TicketStore
+
 export interface Store {
-  users: { [key: string]: User }
-  organizations: { [key: string]: Organization }
-  tickets: { [key: string]: Ticket }
+  [key: string]: EntityStores
 }
