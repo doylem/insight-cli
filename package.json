@@ -22,7 +22,9 @@
   },
   "homepage": "https://github.com/doylem/insight-cli#readme",
   "devDependencies": {
+    "@types/columnify": "^1.5.0",
     "@types/jest": "^26.0.20",
+    "@types/lodash.filter": "^4.6.6",
     "@types/node": "^14.14.26",
     "@types/readline-sync": "^1.4.3",
     "@typescript-eslint/eslint-plugin": "^4.15.0",
@@ -34,7 +36,11 @@
     "typescript": "^4.1.5"
   },
   "dependencies": {
+    "chalk": "^4.1.0",
+    "columnify": "^1.5.4",
+    "lodash.filter": "^4.6.0",
     "ora": "^5.3.0",
-    "readline-sync": "^1.4.10"
+    "readline-sync": "^1.4.10",
+    "search-query-parser": "^1.5.5"
   }
 }
