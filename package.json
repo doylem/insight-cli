@@ -8,6 +8,7 @@
     "start:debug": "tsc && node --inspect dist/index.js",
     "build": "tsc",
     "test": "jest",
+    "test:watch": "jest --watch",
     "lint": "npm run eslint && npm run prettier",
     "eslint": "eslint src/**/*.ts",
     "prettier": "prettier --check \"src/**/*.ts\""
