@@ -3,9 +3,9 @@
 ## Distilled Requirements
 
 - Command line interface
-- Load three json files - store in memory
-- Propmt: Choose data source
-- Prompt: Search data source
+- Load three json files - store in memory, persistence between sessions is not required
+- Prompt: Choose data source
+- Prompt: Keyword search
   - Results in human readable format
   - Display data from related entities
   - When no results; display helpful message
@@ -24,10 +24,14 @@
 
 ### Storing & retreiving data
 
-Given that we know the data shapes, and the data depth is not dynamically deep we can use ragular old JS objects as a dictionary.
+Given that we know the data shapes, and the data depth is relatively shallow, we can use ragular old JS objects as a dictionary.
 In a larger application that requires DB persistence I would use something like GraphQL, Rails or MongoDB and lean on their vastly superior data relationship modelling.
 
-Relationships between data will be defined in typescript types.
+### Relationships
+
+Relationships between data files will be defined in Typescript types. In a real-world application and with more time, I would have liked to explore how a graphQL schema might have made this more extensible than static TS types.
+
+![data-relationships](data-relationships.png)
 
 ### CLI parser
 

@@ -1,15 +1,15 @@
 <p align="center">
   <img src="https://cdn.iconscout.com/icon/free/png-256/zendesk-282559.png" alt="Logo" width="80" height="80">
   <h1 align="center">insight-cli</h1>
-  <p>A simple JSON searching application</p>
+  <p>A Node JSON searching application</p>
 </p>
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
   <summary>Table of Contents</summary>
   <ol>
-    <li>
-      <a href="#getting-started">Getting Started</a>
+    <li><a href="#before-we-get-started">Before we get started</a></li>
+    <li><a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
@@ -18,11 +18,20 @@
     <li><a href="#usage">Usage</a></li>
     <li><a href="#testing">Testing</a></li>
     <li><a href="#quality">Quality</a></li>
-    <li><a href="#assumptions">Assumptions</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
     <li><a href="#troubleshooting">Troubleshooting</a></li>
   </ol>
 </details>
+
+## Before we get started
+
+### Why the name?
+
+A quick search for 'Zen' revealed that "Zen emphasizes rigorous self-restraint, meditation-practice, _insight_ into the nature of mind"... sounded like a cool name for a searching app too so I thought, why not! 😉
+
+### Design
+
+I've documented my design choices over in [DESIGN.md](DESIGN.md)
 
 ## Getting Started
 
@@ -80,7 +89,31 @@ Alternateively, you may [install Node and npm globally](#installing-node-and-npm
    npm start
    ```
 
-1. Follow the prompts
+1. Follow the prompts to search the data files
+
+- (S)earch:
+
+  - Data source:
+
+    - You will be prompted to search on a specific data source
+      The possible options are: (U)sers, (O)rganizations, (T)ickets
+
+  - Keyword search:
+
+    - Type the keyword Eg. 'admin' when prompted and press Enter
+      Eg. 'Search within users: admin'
+      NOTE: Search is case insensitive
+
+  - Empty value search:
+
+    - Type 'isEmpty:key' where 'key' is the name of the empty field name you wish to search for
+      Eg. 'Search within tickets: isEmpty:description'
+
+- (H)elp:
+  Displays this message
+
+- (E)xit:
+  Will exit this program
 
 ## Testing
 
@@ -104,13 +137,28 @@ We rely on eslint and prettier to ensure high code quailty and consistency. To l
 npm run lint
 ```
 
-## Assumptions
-
-TBD
-
 ## Acknowledgements
 
-TBD
+### Dependencies
+
+Some third party dependencies were chosen where implementing this myself would have been cumbersome our out of scope for the purposes of this code challenge. The third party dependencies used have been justified below.
+
+- [Chalk](https://github.com/chalk/chalk)
+  - A much nicer experience for full colour rich text on the command line
+  - I started out doing this the manual way with octal commands and it looked super ugly and unreadable
+- [Columnify](https://github.com/timoxley/columnify)
+  - Neater presentation of tabular like data
+- [Lodash.filter](https://www.npmjs.com/package/lodash.filter)
+  - For easier object filtering logic
+  - Note: This is only the filter package from lodash, and not the entire suite of tools which i did not need
+- [Ora](https://github.com/sindresorhus/ora)
+  - Elegant terminal spinners to display visual feedback when loading large files in to memory
+- [readline-sync](https://github.com/anseki/readline-sync)
+  - Synchronous-like Readline rather than having nested callbacks
+  - Nicer to work with and easier to read & understand than the native `fs.readline`
+- [search-query-parser](https://github.com/nepsilon/search-query-parser)
+  - A parsing tool which enabled more advanced search query syntax such as `isEmpty:key` and a nice way to standardise and tokenise search parameters
+  - Allows for flexibility for future potential searching requirements
 
 ## Troubleshooting
 
