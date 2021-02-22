@@ -6,6 +6,7 @@
   "scripts": {
     "start": "tsc && node dist/index.js",
     "start:debug": "tsc && node --inspect dist/index.js",
+    "build": "tsc",
     "test": "jest",
     "lint": "npm run eslint && npm run prettier",
     "eslint": "eslint src/**/*.ts",
