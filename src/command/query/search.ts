@@ -1,7 +1,7 @@
 import { SearchParserResult } from 'search-query-parser'
 import { Store as DataStore, EntityStores, Entities } from 'state/types'
 import filter from 'lodash.filter'
-import normalizeText from 'util/normalizeText'
+import normalizeText from '../../util/normalizeText'
 
 const compareValue = (value: string | number | boolean | string[], text: string): boolean => {
   // values can also be arrays Eg. "tags"
@@ -30,8 +30,10 @@ const search = (
   const normalizedSearchText = normalizeText(queryOptions.text || [''])
   Object.values(entity.data).forEach((value) => {
     // handle isEmpty:key queries
-    if (queryOptions.isEmpty && isValueEmpty(value[queryOptions.isEmpty])) {
-      results.push({ ...value, relationships: [] })
+    if (queryOptions.isEmpty) {
+      if (value[queryOptions.isEmpty] !== undefined && isValueEmpty(value[queryOptions.isEmpty])) {
+        results.push({ ...value, relationships: [] })
+      }
     } else {
       // Filter by search text
       const result = filter(value as Entities, (each) => compareValue(each, normalizedSearchText))

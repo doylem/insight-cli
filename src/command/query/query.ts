@@ -3,7 +3,7 @@ import { Store as DataStore, Entities } from 'state/types'
 import columnify from 'columnify'
 import chalk from 'chalk'
 import search from './search'
-import normalizeText from 'util/normalizeText'
+import normalizeText from '../../util/normalizeText'
 
 const highlightText = (text: string) => chalk.black.bgCyan(text)
 

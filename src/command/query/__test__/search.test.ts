@@ -73,37 +73,46 @@ describe('search', () => {
   })
 
   describe('with an isEmpty:key flag', () => {
-    describe('with a matching empty key', () => {
-      it('returns one result', () => {
-        const queryOptions = { isEmpty: 'description' }
-        const results = search(testStoreData as any, testStoreData.tickets as any, queryOptions)
-        expect(results.results).toHaveLength(1)
+    describe('with a key that exists', () => {
+      describe('with a matching empty field', () => {
+        it('returns one result', () => {
+          const queryOptions = { isEmpty: 'description' }
+          const results = search(testStoreData as any, testStoreData.tickets as any, queryOptions)
+          expect(results.results).toHaveLength(1)
+        })
+
+        it('returns the matching value with relationships', () => {
+          const queryOptions = { isEmpty: 'description' }
+          const results = search(testStoreData as any, testStoreData.tickets as any, queryOptions)
+          const expectedResult = [
+            {
+              ...testStoreData.tickets.data['436bf9b0-1147-4c0a-8439-6f79833bff5b'],
+              relationships: [
+                {
+                  data: testStoreData.organizations.data['101'],
+                  name: 'Organization',
+                },
+                {
+                  data: testStoreData.users.data['1'],
+                  name: 'User (Assignee)',
+                },
+                {
+                  data: testStoreData.users.data['1'],
+                  name: 'User (Submitter)',
+                },
+              ],
+            },
+          ]
+
+          expect(results.results).toEqual(expectedResult)
+        })
       })
-
-      it('returns the matching value with relationships', () => {
-        const queryOptions = { isEmpty: 'description' }
+    })
+    describe('with a key that does not exist', () => {
+      it('returns no results', () => {
+        const queryOptions = { isEmpty: 'thisKeyShouldNotExist' }
         const results = search(testStoreData as any, testStoreData.tickets as any, queryOptions)
-        const expectedResult = [
-          {
-            ...testStoreData.tickets.data['436bf9b0-1147-4c0a-8439-6f79833bff5b'],
-            relationships: [
-              {
-                data: testStoreData.organizations.data['101'],
-                name: 'Organization',
-              },
-              {
-                data: testStoreData.users.data['1'],
-                name: 'User (Assignee)',
-              },
-              {
-                data: testStoreData.users.data['1'],
-                name: 'User (Submitter)',
-              },
-            ],
-          },
-        ]
-
-        expect(results.results).toEqual(expectedResult)
+        expect(results.results).toHaveLength(0)
       })
     })
   })
