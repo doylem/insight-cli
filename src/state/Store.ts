@@ -10,15 +10,15 @@ import {
 import arrayToDict from '../util/arrayToDict'
 import config from '../config/config'
 
-const userRelationships: UserRelationships = [
+export const userRelationships: UserRelationships = [
   {
     store: 'organizations',
     key: 'organization_id',
     name: 'Organization',
   },
 ]
-const organizationRelationships: OrganizationRelationships = []
-const ticketRelationships: TicketRelationships = [
+export const organizationRelationships: OrganizationRelationships = []
+export const ticketRelationships: TicketRelationships = [
   {
     store: 'organizations',
     key: 'organization_id',
@@ -37,16 +37,28 @@ const ticketRelationships: TicketRelationships = [
 ]
 
 class Store {
-  public store: DataStore
+  public store: DataStore | null
 
   constructor() {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const usersJson = require(config.users)
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const organizationsJson = require(config.organizations)
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const ticketsJson = require(config.tickets)
+    let usersJson, organizationsJson, ticketsJson
+    this.store = null
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      usersJson = require(config.users)
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      organizationsJson = require(config.organizations)
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      ticketsJson = require(config.tickets)
 
+      this.parseData(usersJson, organizationsJson, ticketsJson)
+    } catch (error) {
+      console.error(
+        '\n\nError while parsing data files. Please check files exist in the locations configured in config/config.ts\n',
+      )
+    }
+  }
+
+  private parseData(usersJson: any, organizationsJson: any, ticketsJson: any): void {
     const users: UserStore = {
       data: arrayToDict(usersJson),
       relationships: userRelationships,
@@ -70,7 +82,7 @@ class Store {
     }
   }
 
-  public getStore(): DataStore {
+  public getStore(): DataStore | null {
     return this.store
   }
 }
