@@ -1,11 +1,11 @@
 import Store, { organizationRelationships, ticketRelationships, userRelationships } from '../Store'
-import config from '../../config/config'
+import config from '../../config/data'
 import { mocked } from 'ts-jest/utils'
 import testUsers from './testData/testUsers.json'
 import testOrganizations from './testData/testOrganizations.json'
 import testTickets from './testData/testTickets.json'
 
-jest.mock('../../config/config')
+jest.mock('../../config/data')
 const mockedConfig = mocked(config)
 
 describe('#Store', () => {

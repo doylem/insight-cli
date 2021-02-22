@@ -8,7 +8,7 @@ import {
   TicketStore,
 } from './types'
 import arrayToDict from '../util/arrayToDict'
-import config from '../config/config'
+import config from '../config/data'
 
 export const userRelationships: UserRelationships = [
   {
@@ -53,7 +53,7 @@ class Store {
       this.parseData(usersJson, organizationsJson, ticketsJson)
     } catch (error) {
       console.error(
-        '\n\nError while parsing data files. Please check files exist in the locations configured in config/config.ts\n',
+        '\n\nError while parsing data files. Please check files exist in the locations configured in config/data.ts\n',
       )
     }
   }

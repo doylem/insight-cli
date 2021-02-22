@@ -2,6 +2,7 @@ import Store from './state/Store'
 import { Store as DataStore, Stores } from './state/types'
 import prompt from 'readline-sync'
 import ora from 'ora'
+import { loopMode } from './config/app'
 
 import command from './command'
 
@@ -22,7 +23,7 @@ export const init = (): void => {
   spinner.stop()
 
   if (store) {
-    while (true) {
+    do {
       console.log('')
       const choice = prompt.question('(S)earch, (H)elp or (E)xit: ').toUpperCase()
 
@@ -53,6 +54,6 @@ export const init = (): void => {
       } else {
         inputError()
       }
-    }
+    } while (loopMode())
   }
 }

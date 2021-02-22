@@ -145,7 +145,7 @@ describe('query functions', () => {
       })
     })
     describe('with no results', () => {
-      it('does not calls columnify', () => {
+      it('does not call columnify', () => {
         displayResults([], 'search text', 'users')
 
         expect(mockedColumnify).not.toHaveBeenCalled()
