@@ -5,9 +5,9 @@ import chalk from 'chalk'
 import search from './search'
 import normalizeText from '../../util/normalizeText'
 
-const highlightText = (text: string) => chalk.black.bgCyan(text)
+export const highlightText = (text: string): string => chalk.black.bgCyan(text)
 
-const checkAndHighlightSearchText = (data: string, normalizedSearchText: string): string => {
+export const checkAndHighlightSearchText = (data: string, normalizedSearchText: string): string => {
   if (!data.toLowerCase().includes(normalizedSearchText)) return data
 
   // Some values are arrays which have been joined with commas
@@ -32,14 +32,14 @@ export const displayResults = (
   entityName: string,
 ): void => {
   results.map((result: Entities) => {
-    const { relationships } = result
+    const relationships = Object.assign([], result.relationships)
     delete result.relationships // remove here as we will display relationships seperately
     console.log(chalk.green(`\n--- Found match in: ${entityName} ---`))
     console.log(
       columnify(result, {
         columnSplitter: ' | ',
         showHeaders: false,
-        dataTransform: (text) => checkAndHighlightSearchText(text, highlightTerm),
+        dataTransform: (text: string) => checkAndHighlightSearchText(text, highlightTerm),
         truncate: true,
         maxWidth: 100,
       }),
@@ -57,7 +57,14 @@ export const displayResults = (
       relationships.forEach(({ name, data }: { name: string; data: Entities }) => {
         console.log('')
         console.log(chalk.blue(`--- ${name} ---`))
-        console.log(columnify(data, { columnSplitter: ' | ', showHeaders: false }))
+        console.log(
+          columnify(data, {
+            columnSplitter: ' | ',
+            showHeaders: false,
+            truncate: true,
+            maxWidth: 100,
+          }),
+        )
       })
     }
   })
@@ -73,13 +80,11 @@ export const displaySummary = (totalSearchResults: number, searchQuery: string):
       ),
     )
   } else {
-    console.log('')
-    console.log(chalk.red(`🤨 No results found for ${highlightText(searchQuery)}.`))
-    console.log('')
+    console.log(chalk.red(`\n🤨 No results found for ${highlightText(searchQuery)}.\n`))
   }
 }
 
-const parseSearchQuery = (searchQuery: string): SearchParserResult => {
+export const parseSearchQuery = (searchQuery: string): SearchParserResult => {
   const options = { keywords: ['isEmpty'], tokenize: true, offsets: false }
   return searchQueryParser.parse(searchQuery, options) as SearchParserResult
 }
