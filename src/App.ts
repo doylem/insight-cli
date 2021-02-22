@@ -10,11 +10,12 @@ const inputError = () => {
 }
 
 export const init = (): void => {
-  console.log('_________________________________')
-  console.log('|                                |')
-  console.log('|  insight-cli 🎉                |')
-  console.log('|  A helpful JSON search app     |')
-  console.log('|________________________________|\n')
+  console.log(`
+     ________________________________
+    |                                |
+    |  insight-cli 🎉                |
+    |  A helpful JSON search app     |
+    |________________________________|`)
 
   const spinner = ora('Loading data').start()
   const store: DataStore | null = new Store().getStore()
