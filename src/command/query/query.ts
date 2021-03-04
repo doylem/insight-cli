@@ -8,11 +8,11 @@ import normalizeText from '../../util/normalizeText'
 export const highlightText = (text: string): string => chalk.black.bgCyan(text)
 
 export const checkAndHighlightSearchText = (data: string, normalizedSearchText: string): string => {
-  if (!data.toLowerCase().includes(normalizedSearchText)) return data
-
-  // Some values are arrays which have been joined with commas
-  // Find which value to highlight by iterating over them
-  if (data.indexOf(',') !== -1) {
+  if (data.toLowerCase() === normalizedSearchText) {
+    return highlightText(data)
+  } else if (data.indexOf(',') !== -1) {
+    // Some values are arrays which have been joined with commas
+    // Find which value to highlight by iterating over them
     const tokens = data.split(',')
     tokens.forEach((element, index) => {
       if (element.toLowerCase().includes(normalizedSearchText)) {
@@ -22,7 +22,7 @@ export const checkAndHighlightSearchText = (data: string, normalizedSearchText: 
 
     return tokens.join(', ')
   } else {
-    return highlightText(data)
+    return data
   }
 }
 
